@@ -1,0 +1,19 @@
+version: '3'
+services:
+  '{{kebab name}}':
+    build: ${{upper (snake name)}}_HOME/backend
+    container_name: '{{kebab name}}'
+    environment:
+      - LOCAL=true
+      - BASE_URL=localhost
+      - DEBUGGER_ARGS=--continue
+      - DATABASE_URL={{kebab name}}-db
+      - DATABASE_PORT=5432
+      - DATABASE_USER={{kebab name}}
+      - DATABASE_PASSWORD={{kebab name}}
+      - DATABASE_SCHEMA={{kebab name}}
+    ports:
+      - '8080'
+      - '40000:40000'
+    volumes:
+      - '${{upper (snake name)}}_HOME/backend/{{kebab name}}:/srv/package'

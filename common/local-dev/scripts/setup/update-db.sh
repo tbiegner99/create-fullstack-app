@@ -1,0 +1,2 @@
+#! /bin/bash
+docker run -v ${{ upper (snake name) }}_HOME/database/{{kebab name}}:/liquibase/lib --network={{kebab name}}-local-dev liquibase/liquibase liquibase update  --username={{kebab name}} --password={{kebab name}} --url=jdbc:postgresql://{{kebab name}}-db:5432/{{kebab name}} --changelogFile=changelog-root.xml

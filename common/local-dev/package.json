@@ -1,0 +1,13 @@
+{
+  "name": "@{{scope}}/{{kebab name}}",
+  "version": "0.0.1",
+  "description": "{{capital name space=true}} System",
+  "bin": {
+    "{{kebab name}}": "./scripts/{{kebab name}}.sh"
+  },
+  "scripts": {
+    "preinstall": "./scripts/setup/install.sh"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@tbiegner99/create-fullstack-app",
+  "description": "Create new full stack app with either typescript or go backend",
+  "version": "0.0.16",
+  "author": "TJ Biegner <tbiegner99@gmail.com>",
+  "scripts": {
+    "build": "tsup src/cli.ts --minify",
+    "clean": "shx rm -rf lib",
+    "dev": "tsup src/cli.ts --watch",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "bin": "dist/cli.js",
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "devDependencies": {
+    "@types/node": "^17.0.29",
+    "postgresql-client": "^2.10.1",
+    "tsup": "^5.12.1",
+    "typescript": "^4.6.3",
+    "uuid": "^9.0.1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.5",
+    "create-create-app": "^7.3.0",
+    "firebase-admin": "^12.0.0",
+    "read-pkg": "^9.0.1",
+    "socket.io-client": "^4.7.2"
+  }
+}
