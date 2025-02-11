@@ -1,22 +1,29 @@
-const path = require('path');
-const packageJson = require('./package.json');
+import path from 'path';
 
-module.exports = (env) => ({
+import { defineConfig } from '@rspack/cli';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import rspack from '@rspack/core';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+export default defineConfig((env) => ({
     devtool: env.MODE === 'development' ? 'inline-source-map' : 'source-map',
     mode: env.MODE || 'production',
     entry: './src/app.tsx',
     output: {
-        filename: '{{name}}-app.js', // '[name].[contenthash].bundle.js',
-        libraryTarget: 'system',
+        filename: 'event-photos-app.js', // '[name].[contenthash].bundle.js',
+       
         path: path.resolve(__dirname, 'build', process.env.OUTDIR || ''),
         publicPath: process.env.BASE_PATH
     },
-    externals: ['react', 'react-dom'],
+    // externals: ['react', 'react-dom'],
     resolve: {
         extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
     },
+
+    plugins:[new rspack.HtmlRspackPlugin()],
     devServer: {
-        hot: true,
+        // hot: true,
         client: {
             overlay: {
                 warnings: false,
@@ -24,7 +31,7 @@ module.exports = (env) => ({
             }
         },
         host: '0.0.0.0',
-        port: '{{debugPort}}',
+        port: '4000',
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
@@ -35,20 +42,42 @@ module.exports = (env) => ({
     },
 
     module: {
+        
         rules: [
             {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.(jsx?)$/,
-                exclude: /node_modules/,
-                use: ['babel-loader']
-            },
+                test: /\.jsx$/,
+                use: {
+                  loader: 'builtin:swc-loader',
+                  options: {
+                    jsc: {
+                      parser: {
+                        syntax: 'ecmascript',
+                        jsx: true,
+                      },
+                    },
+                  },
+                },
+                type: 'javascript/auto',
+              },
+              {
+                test: /\.tsx$/,
+                use: {
+                  loader: 'builtin:swc-loader',
+                  options: {
+                    jsc: {
+                      parser: {
+                        syntax: 'typescript',
+                        tsx: true,
+                      },
+                    },
+                  },
+                },
+                type: 'javascript/auto',
+              },
             {
                 test: /\.svg$/,
                 exclude: /node_modules/,
+                issuer: /\.[jt]sx?$/,
                 use: ['@svgr/webpack']
             },
             {
@@ -82,4 +111,4 @@ module.exports = (env) => ({
             }
         ]
     }
-});
+}),);

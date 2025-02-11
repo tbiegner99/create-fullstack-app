@@ -1,14 +1,15 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { connect } from 'react-redux';
-import styles from './app.css';
-
+import * as styles from './app.module.css';
+ 
 function AppContent() {
 
-    return (
+    return ( 
         <section className={styles.appContainer}>
-
+            <h1>MAIN</h1>
             <main className={styles.appContent}>
+         
                 <Outlet />
             </main>
             <footer>

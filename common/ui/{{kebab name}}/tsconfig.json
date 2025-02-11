@@ -1,8 +1,12 @@
 {
     "compilerOptions": {
         "outDir": "./dist/",
-        "lib": ["es5", "es6", "dom"],
-        //"sourceMap": true,
+        "lib": [
+            "es5",
+            "es6",
+            "dom"
+        ],
+        "sourceMap": true,
         "noImplicitAny": true,
         "module": "commonjs",
         "target": "es5",
@@ -11,5 +15,8 @@
         "esModuleInterop": true,
         "moduleResolution": "node"
     },
-    "include": ["ui/src/**/*", "Globals.d.ts"]
+    "include": [
+        "ui/src/**/*",
+        "Globals.d.ts"
+    ]
 }
