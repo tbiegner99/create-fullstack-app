@@ -1,1 +1,2 @@
+npm run build
 npx create-fullstack-app <app-name> --template=go|node
